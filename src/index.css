@@ -54,3 +54,30 @@ textarea {
   margin: 0;
   color: #666;
 }
+
+/* AnimalCard */
+.animal-list {
+  margin-top: 24px;
+}
+
+.animal-list ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.animal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+}
+
+.animal-card strong {
+  font-size: 20px;
+}

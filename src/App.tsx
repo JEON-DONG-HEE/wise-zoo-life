@@ -17,7 +17,7 @@ function App() {
           <p>동물 목록, 상태, 담당 사육사 정보를 관리합니다.</p>
         </section>
 
-        <section>
+        <section className="animal-list">
           <h2></h2>
           <ul>
             {animalData.map((animal) => (
