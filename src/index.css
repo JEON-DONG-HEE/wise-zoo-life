@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, "Noto Sans KR", sans-serif;
+  background-color: #f5f6f8;
+  color: #222;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 36px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #666;
+}
+
+.page-content {
+  max-width: 1200px;
+}
+
+.summary-card {
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+}
+
+.summary-card h2 {
+  margin: 0 0 8px;
+}
+
+.summary-card p {
+  margin: 0;
+  color: #666;
+}
