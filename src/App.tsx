@@ -1,7 +1,5 @@
-import { useState } from "react";
 import "./App.css";
-import { animalData } from "./data/animalData";
-import AnimalCard from "./components/AnimalCard";
+import AnimalList from "./components/AnimalList";
 
 function App() {
   return (
@@ -17,14 +15,8 @@ function App() {
           <p>동물 목록, 상태, 담당 사육사 정보를 관리합니다.</p>
         </section>
 
-        <section className="animal-list">
-          <h2></h2>
-          <ul>
-            {animalData.map((animal) => (
-              <AnimalCard key={animal.id} animal={animal} />
-            ))}
-          </ul>
-        </section>
+        {/* 동물 리스트 컴포넌트 */}
+        <AnimalList />
       </main>
     </div>
   );
