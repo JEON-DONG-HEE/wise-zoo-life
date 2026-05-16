@@ -23,3 +23,29 @@
   background-color: #eeeeee;
   color: #666666;
 } /* 이동완료 */
+
+/* 필터버튼 */
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 20px;
+}
+
+.filter-buttons button {
+  padding: 8px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 999px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-buttons button:hover {
+  background-color: #f2f4f7;
+}
+
+.filter-buttons button:active {
+  transform: translateY(1px);
+}
