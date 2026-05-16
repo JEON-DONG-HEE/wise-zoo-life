@@ -4,25 +4,41 @@ import AnimalCard from "./AnimalCard";
 
 function AnimalList() {
   const [animals, setAnimals] = useState(animalData);
-  const [selectedStatus, setselectedStatus] = useState("ALL");
+  const [selectedStatus, setSelectedStatus] = useState("ALL");
+  const [loading, setLoading] = useState(false);
 
   const handleShowAll = () => {
-    setAnimals(animalData);
-    setselectedStatus("ALL");
+    setLoading(true);
+
+    setTimeout(() => {
+      setAnimals(animalData);
+      setSelectedStatus("ALL");
+      setLoading(false);
+    }, 500); /* 로딩 상태 확인용 임시 지연 처리 */
   };
   const handleShowActive = () => {
-    const activeAnimals = animalData.filter(
-      (animal) => animal.status === "ACTIVE",
-    );
-    setAnimals(activeAnimals);
-    setselectedStatus("ACTIVE");
+    setLoading(true);
+
+    setTimeout(() => {
+      const activeAnimals = animalData.filter(
+        (animal) => animal.status === "ACTIVE",
+      );
+      setAnimals(activeAnimals);
+      setSelectedStatus("ACTIVE");
+      setLoading(false);
+    }, 500);
   };
   const handleShowResting = () => {
-    const restingAnimals = animalData.filter(
-      (animal) => animal.status === "RESTING",
-    );
-    setAnimals(restingAnimals);
-    setselectedStatus("RESTING");
+    setLoading(true);
+
+    setTimeout(() => {
+      const restingAnimals = animalData.filter(
+        (animal) => animal.status === "RESTING",
+      );
+      setAnimals(restingAnimals);
+      setSelectedStatus("RESTING");
+      setLoading(false);
+    }, 500);
   };
 
   return (
@@ -52,11 +68,15 @@ function AnimalList() {
           휴식중
         </button>
       </div>
-      <ul>
-        {animals.map((animal) => (
-          <AnimalCard key={animal.id} animal={animal} />
-        ))}
-      </ul>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {animals.map((animal) => (
+            <AnimalCard key={animal.id} animal={animal} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
