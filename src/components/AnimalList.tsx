@@ -40,6 +40,19 @@ function AnimalList() {
       setLoading(false);
     }, 500);
   };
+  const handleShowTransferred = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      const transferredAnimals = animalData.filter(
+        () => false /* empty 화면 테스트용 */,
+        //(animal) => animal.status === "TRANSFERRED",
+      );
+      setAnimals(transferredAnimals);
+      setSelectedStatus("TRANSFERRED");
+      setLoading(false);
+    }, 500);
+  };
 
   return (
     <section className="animal-list">
@@ -67,9 +80,18 @@ function AnimalList() {
         >
           휴식중
         </button>
+        <button
+          type="button"
+          className={selectedStatus === "TRANSFERRED" ? "active" : ""}
+          onClick={handleShowTransferred}
+        >
+          이동완료
+        </button>
       </div>
       {loading ? (
         <p>Loading...</p>
+      ) : animals.length === 0 ? (
+        <p className="empty-message">조회된 동물이 없습니다.</p>
       ) : (
         <ul>
           {animals.map((animal) => (

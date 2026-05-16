@@ -55,3 +55,13 @@
   border-color: #222;
   color: #fff;
 } /* 버튼 active 처리 */
+
+/* 조회데이터 없음 표시 */
+.empty-message {
+  padding: 24px;
+  background-color: #fff;
+  border: 1px dashed #d0d5dd;
+  border-radius: 16px;
+  color: #667085;
+  text-align: center;
+}
