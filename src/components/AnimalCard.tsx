@@ -1,4 +1,5 @@
 import type { Animal } from "../types/animal";
+import AnimalStatusBadge from "./AnimalStatusBadge";
 
 type AnimalCardProps = {
   animal: Animal;
@@ -11,6 +12,8 @@ function AnimalCard({ animal }: AnimalCardProps) {
       <strong>{animal.name}</strong>
       <strong>{animal.species}</strong>
       <strong>{animal.department}</strong>
+      <strong>{animal.keeper}</strong>
+      <AnimalStatusBadge status={animal.status} />
     </li>
   );
 }
