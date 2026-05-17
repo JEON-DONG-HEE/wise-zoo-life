@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { animalData } from "../data/animalData";
+import { getAnimals } from "../services/animalService";
 import AnimalCard from "./AnimalCard";
 
 /* 필터 버튼 상태는 아래 4개 중 하나만 가능 */
 type FilterStatus = "ALL" | "ACTIVE" | "RESTING" | "TRANSFERRED";
 
 function AnimalList() {
-  const [animals, setAnimals] = useState(animalData);
+  const [animals, setAnimals] = useState(getAnimals());
   const [selectedStatus, setSelectedStatus] = useState<FilterStatus>("ALL");
   const [loading, setLoading] = useState(false);
 
@@ -16,13 +16,13 @@ function AnimalList() {
     setTimeout(() => {
       // 전체 보기라면 필터링하지 말고 원본 전체 데이터를 넣고 함수를 종료
       if (status === "ALL") {
-        setAnimals(animalData);
+        setAnimals(getAnimals());
         setSelectedStatus("ALL");
         setLoading(false);
         return;
       }
 
-      const filteredAnimals = animalData.filter(
+      const filteredAnimals = getAnimals().filter(
         (animal) => animal.status === status,
       );
 
