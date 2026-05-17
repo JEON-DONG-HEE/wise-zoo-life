@@ -1,35 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAnimals } from "../services/animalService";
 import AnimalCard from "./AnimalCard";
+import type { Animal } from "../types/animal";
 
 /* 필터 버튼 상태는 아래 4개 중 하나만 가능 */
 type FilterStatus = "ALL" | "ACTIVE" | "RESTING" | "TRANSFERRED";
 
 function AnimalList() {
-  const [animals, setAnimals] = useState(getAnimals());
+  const [animals, setAnimals] = useState<Animal[]>([]); //animals는 Animal 객체들이 들어가는 배열
   const [selectedStatus, setSelectedStatus] = useState<FilterStatus>("ALL");
   const [loading, setLoading] = useState(false);
 
-  const handleFilterAnimals = (status: FilterStatus) => {
+  useEffect(() => {
+    const fetchAnimals = async () => {
+      setLoading(true);
+      const data = await getAnimals(); //getAnimals() 결과가 올 때까지 기다린다. 결과가 오면 data에 담는다.
+      setAnimals(data);
+      setLoading(false);
+    };
+    fetchAnimals();
+  }, []);
+
+  const handleFilterAnimals = async (status: FilterStatus) => {
     setLoading(true);
 
-    setTimeout(() => {
-      // 전체 보기라면 필터링하지 말고 원본 전체 데이터를 넣고 함수를 종료
-      if (status === "ALL") {
-        setAnimals(getAnimals());
-        setSelectedStatus("ALL");
-        setLoading(false);
-        return;
-      }
+    const data = await getAnimals();
 
-      const filteredAnimals = getAnimals().filter(
-        (animal) => animal.status === status,
-      );
-
-      setAnimals(filteredAnimals);
-      setSelectedStatus(status);
+    // 전체 보기라면 필터링하지 말고 원본 전체 데이터를 넣고 함수를 종료
+    if (status === "ALL") {
+      setAnimals(data);
+      setSelectedStatus("ALL");
       setLoading(false);
-    }, 500);
+      return;
+    }
+
+    const filteredAnimals = data.filter((animal) => animal.status === status);
+
+    setAnimals(filteredAnimals);
+    setSelectedStatus(status);
+    setLoading(false);
   };
 
   return (
