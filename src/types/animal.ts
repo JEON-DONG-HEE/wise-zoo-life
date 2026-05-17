@@ -4,6 +4,9 @@ export type AnimalStatus = "ACTIVE" | "RESTING" | "TRANSFERRED";
 // ACTIVE      → 관리중
 // RESTING     → 휴식중
 // TRANSFERRED → 이동완료
+export type FilterStatus =
+  | "ALL"
+  | AnimalStatus; /* FilterStatus 는 2개 이상의 컴포넌트에서 사용중이므로 이렇게 공통화 */
 
 export type Animal = {
   id: number;

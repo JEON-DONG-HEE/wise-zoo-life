@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAnimals } from "../services/animalService";
 import AnimalCard from "./AnimalCard";
-import type { Animal } from "../types/animal";
+import type { Animal, FilterStatus } from "../types/animal";
 import LoadingMessage from "./LoadingMessage";
 import EmptyMessage from "./EmptyMessage";
 import ErrorMessage from "./ErrorMessage";
 import AnimalSearchBox from "./AnimalSearchBox";
-
-/* 필터 버튼 상태는 아래 4개 중 하나만 가능 */
-type FilterStatus = "ALL" | "ACTIVE" | "RESTING" | "TRANSFERRED";
-
-const filterOptions: { label: string; value: FilterStatus }[] = [
-  { label: "전체", value: "ALL" },
-  { label: "관리중", value: "ACTIVE" },
-  { label: "휴식중", value: "RESTING" },
-  { label: "이동완료", value: "TRANSFERRED" },
-];
+import AnimalFilterButtons from "./AnimalFilterButtons";
 
 function AnimalList() {
   const [animals, setAnimals] = useState<Animal[]>([]); //animals는 Animal 객체들이 들어가는 배열
@@ -95,19 +86,10 @@ function AnimalList() {
       <h2>동물 목록</h2>
       <p>현재 동물 수 : ({searchedAnimals.length})</p>
       <AnimalSearchBox keyword={keyword} onChangeKeyword={setKeyword} />
-      <div className="filter-buttons">
-        {filterOptions.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            className={selectedStatus === option.value ? "active" : ""}
-            onClick={() => handleFilterAnimals(option.value)}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
-
+      <AnimalFilterButtons
+        selectedStatus={selectedStatus}
+        onChangeStatus={handleFilterAnimals}
+      />
       {renderAnimalList()}
     </section>
   );
