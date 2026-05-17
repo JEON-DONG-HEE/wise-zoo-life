@@ -87,3 +87,23 @@
   text-align: center;
   font-weight: 600;
 }
+
+/* 검색창 */
+.search-box {
+  margin: 16px 0;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #222;
+}

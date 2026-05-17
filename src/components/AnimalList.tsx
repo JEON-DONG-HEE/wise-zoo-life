@@ -21,6 +21,7 @@ function AnimalList() {
   const [selectedStatus, setSelectedStatus] = useState<FilterStatus>("ALL");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -61,16 +62,27 @@ function AnimalList() {
     setLoading(false);
   };
 
+  const searchedAnimals = animals.filter((animal) => {
+    const lowerKeyword = keyword.toLowerCase(); // 영어 검색 대비용
+
+    return (
+      animal.name.toLowerCase().includes(lowerKeyword) ||
+      animal.species.toLowerCase().includes(lowerKeyword) ||
+      animal.department.toLowerCase().includes(lowerKeyword) ||
+      animal.keeper.toLowerCase().includes(lowerKeyword)
+    );
+  });
+
   // 동물 리스트 카드 (early return 방식 : 예외 상황 먼저 처리 → 마지막에 정상 화면 return)
   // 데이터 loading, error, empty, success 처리
   const renderAnimalList = () => {
     if (loading) return <LoadingMessage />;
     if (error) return <ErrorMessage message={error} />;
-    if (animals.length === 0) return <EmptyMessage />;
+    if (searchedAnimals.length === 0) return <EmptyMessage />;
 
     return (
       <ul>
-        {animals.map((animal) => (
+        {searchedAnimals.map((animal) => (
           <AnimalCard key={animal.id} animal={animal} />
         ))}
       </ul>
@@ -80,7 +92,18 @@ function AnimalList() {
   return (
     <section className="animal-list">
       <h2>동물 목록</h2>
-      <p>현재 동물 수 : ({animals.length})</p>
+      <p>현재 동물 수 : ({searchedAnimals.length})</p>
+      <div className="search-box">
+        <input
+          type="text"
+          value={keyword}
+          onChange={(event) => {
+            setKeyword(event.target.value);
+          }}
+          placeholder="동물명, 종, 담당 사육사 검색"
+        />
+      </div>
+
       <div className="filter-buttons">
         {filterOptions.map((option) => (
           <button
