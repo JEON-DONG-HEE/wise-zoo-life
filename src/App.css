@@ -65,3 +65,14 @@
   color: #667085;
   text-align: center;
 }
+
+/* 에러 메시지 표시 */
+.error-message {
+  padding: 24px;
+  background-color: #fff5f5;
+  border: 1px solid #ffcccc;
+  border-radius: 16px;
+  color: #c92a2a;
+  text-align: center;
+  font-weight: 600;
+}
