@@ -2,54 +2,32 @@ import { useState } from "react";
 import { animalData } from "../data/animalData";
 import AnimalCard from "./AnimalCard";
 
+/* 필터 버튼 상태는 아래 4개 중 하나만 가능 */
+type FilterStatus = "ALL" | "ACTIVE" | "RESTING" | "TRANSFERRED";
+
 function AnimalList() {
   const [animals, setAnimals] = useState(animalData);
-  const [selectedStatus, setSelectedStatus] = useState("ALL");
+  const [selectedStatus, setSelectedStatus] = useState<FilterStatus>("ALL");
   const [loading, setLoading] = useState(false);
 
-  const handleShowAll = () => {
+  const handleFilterAnimals = (status: FilterStatus) => {
     setLoading(true);
 
     setTimeout(() => {
-      setAnimals(animalData);
-      setSelectedStatus("ALL");
-      setLoading(false);
-    }, 500); /* 로딩 상태 확인용 임시 지연 처리 */
-  };
-  const handleShowActive = () => {
-    setLoading(true);
+      // 전체 보기라면 필터링하지 말고 원본 전체 데이터를 넣고 함수를 종료
+      if (status === "ALL") {
+        setAnimals(animalData);
+        setSelectedStatus("ALL");
+        setLoading(false);
+        return;
+      }
 
-    setTimeout(() => {
-      const activeAnimals = animalData.filter(
-        (animal) => animal.status === "ACTIVE",
+      const filteredAnimals = animalData.filter(
+        (animal) => animal.status === status,
       );
-      setAnimals(activeAnimals);
-      setSelectedStatus("ACTIVE");
-      setLoading(false);
-    }, 500);
-  };
-  const handleShowResting = () => {
-    setLoading(true);
 
-    setTimeout(() => {
-      const restingAnimals = animalData.filter(
-        (animal) => animal.status === "RESTING",
-      );
-      setAnimals(restingAnimals);
-      setSelectedStatus("RESTING");
-      setLoading(false);
-    }, 500);
-  };
-  const handleShowTransferred = () => {
-    setLoading(true);
-
-    setTimeout(() => {
-      const transferredAnimals = animalData.filter(
-        () => false /* empty 화면 테스트용 */,
-        //(animal) => animal.status === "TRANSFERRED",
-      );
-      setAnimals(transferredAnimals);
-      setSelectedStatus("TRANSFERRED");
+      setAnimals(filteredAnimals);
+      setSelectedStatus(status);
       setLoading(false);
     }, 500);
   };
@@ -62,28 +40,28 @@ function AnimalList() {
         <button
           type="button"
           className={selectedStatus === "ALL" ? "active" : ""}
-          onClick={handleShowAll}
+          onClick={() => handleFilterAnimals("ALL")} // 인자를 넘겨야 하는 함수는 () => 함수명(값) 형태로 감싸야 함
         >
           전체
         </button>
         <button
           type="button"
           className={selectedStatus === "ACTIVE" ? "active" : ""}
-          onClick={handleShowActive}
+          onClick={() => handleFilterAnimals("ACTIVE")}
         >
           관리중
         </button>
         <button
           type="button"
           className={selectedStatus === "RESTING" ? "active" : ""}
-          onClick={handleShowResting}
+          onClick={() => handleFilterAnimals("RESTING")}
         >
           휴식중
         </button>
         <button
           type="button"
           className={selectedStatus === "TRANSFERRED" ? "active" : ""}
-          onClick={handleShowTransferred}
+          onClick={() => handleFilterAnimals("TRANSFERRED")}
         >
           이동완료
         </button>
