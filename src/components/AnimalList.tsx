@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { getAnimals } from "../services/animalService";
 import AnimalCard from "./AnimalCard";
 import type { Animal } from "../types/animal";
+import LoadingMessage from "./LoadingMessage";
+import EmptyMessage from "./EmptyMessage";
+import ErrorMessage from "./ErrorMessage";
 
 /* 필터 버튼 상태는 아래 4개 중 하나만 가능 */
 type FilterStatus = "ALL" | "ACTIVE" | "RESTING" | "TRANSFERRED";
@@ -54,17 +57,9 @@ function AnimalList() {
   // 동물 리스트 카드 (early return 방식 : 예외 상황 먼저 처리 → 마지막에 정상 화면 return)
   // 데이터 loading, error, empty, success 처리
   const renderAnimalList = () => {
-    if (loading) {
-      return <p>Loading...</p>;
-    }
-
-    if (error) {
-      return <p className="error-message">{error}</p>;
-    }
-
-    if (animals.length === 0) {
-      return <p className="empty-message">조회된 동물이 없습니다.</p>;
-    }
+    if (loading) return <LoadingMessage />;
+    if (error) return <ErrorMessage message={error} />;
+    if (animals.length === 0) return <EmptyMessage />;
 
     return (
       <ul>
