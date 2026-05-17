@@ -5,6 +5,7 @@ import type { Animal } from "../types/animal";
 import LoadingMessage from "./LoadingMessage";
 import EmptyMessage from "./EmptyMessage";
 import ErrorMessage from "./ErrorMessage";
+import AnimalSearchBox from "./AnimalSearchBox";
 
 /* 필터 버튼 상태는 아래 4개 중 하나만 가능 */
 type FilterStatus = "ALL" | "ACTIVE" | "RESTING" | "TRANSFERRED";
@@ -93,17 +94,7 @@ function AnimalList() {
     <section className="animal-list">
       <h2>동물 목록</h2>
       <p>현재 동물 수 : ({searchedAnimals.length})</p>
-      <div className="search-box">
-        <input
-          type="text"
-          value={keyword}
-          onChange={(event) => {
-            setKeyword(event.target.value);
-          }}
-          placeholder="동물명, 종, 담당 사육사 검색"
-        />
-      </div>
-
+      <AnimalSearchBox keyword={keyword} onChangeKeyword={setKeyword} />
       <div className="filter-buttons">
         {filterOptions.map((option) => (
           <button
