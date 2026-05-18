@@ -4,6 +4,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AnimalListPage from "./pages/AnimalListPage";
+import AnimalDetailPage from "./pages/AnimalDetailPage";
 
 function App() {
   return (
@@ -17,9 +18,8 @@ function App() {
         {/* / 주소로 들어오면 /animals로 이동 */}
         <Route path="/" element={<Navigate to="/animals" replace />} />{" "}
         <Route path="/animals" element={<AnimalListPage />} />
+        <Route path="/animals/:id" element={<AnimalDetailPage />} />
       </Routes>
-
-      {/* <AnimalListPage /> */}
     </div>
   );
 }
