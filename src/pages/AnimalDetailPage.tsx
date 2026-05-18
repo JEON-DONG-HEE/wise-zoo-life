@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAnimalById } from "../services/animalService";
 import type { Animal } from "../types/animal";
+import AnimalStatusBadge from "../components/AnimalStatusBadge";
 
 function AnimalDetailPage() {
   const { id } = useParams();
@@ -39,6 +40,10 @@ function AnimalDetailPage() {
         <p>담당 사육사 : {animal.keeper}</p>
         <p>나이 : {animal.age}살</p>
         <p>등록일 : {animal.joinedDate}</p>
+        <div className="animal-detail-status">
+          <span>상태 : </span>
+          <AnimalStatusBadge status={animal.status} />
+        </div>
       </div>
     );
   };

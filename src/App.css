@@ -147,3 +147,13 @@
   background-color: #f8f9fb;
   border-radius: 8px;
 }
+
+/* 상세페이지 상태 표시 */
+.animal-detail-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background-color: #f8f9fb;
+  border-radius: 8px;
+}
