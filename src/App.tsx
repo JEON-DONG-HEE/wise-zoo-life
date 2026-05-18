@@ -1,5 +1,9 @@
+// Routes   :  여러 Route를 감싸는 부모
+// Route    :  특정 주소에 어떤 페이지를 보여줄지 정함
+// Navigate :  다른 주소로 이동시킴
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import AnimalList from "./components/AnimalList";
+import AnimalListPage from "./pages/AnimalListPage";
 
 function App() {
   return (
@@ -9,15 +13,13 @@ function App() {
         <p>동물 정보를 관리하는 인사파트 연습 프로젝트입니다.</p>
       </header>
 
-      <main className="page-content">
-        <section className="summary-card">
-          <h2>동물 정보 관리</h2>
-          <p>동물 목록, 상태, 담당 사육사 정보를 관리합니다.</p>
-        </section>
+      <Routes>
+        {/* / 주소로 들어오면 /animals로 이동 */}
+        <Route path="/" element={<Navigate to="/animals" replace />} />{" "}
+        <Route path="/animals" element={<AnimalListPage />} />
+      </Routes>
 
-        {/* 동물 리스트 컴포넌트 */}
-        <AnimalList />
-      </main>
+      {/* <AnimalListPage /> */}
     </div>
   );
 }
