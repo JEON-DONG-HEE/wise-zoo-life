@@ -133,3 +133,17 @@
 .back-button:hover {
   background-color: #f2f4f7;
 }
+
+/* 동물 상세페이지 */
+.animal-detail {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.animal-detail p {
+  margin: 0;
+  padding: 10px 12px;
+  background-color: #f8f9fb;
+  border-radius: 8px;
+}

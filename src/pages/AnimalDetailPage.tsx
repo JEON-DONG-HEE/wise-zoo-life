@@ -10,17 +10,38 @@ function AnimalDetailPage() {
   const animalId = Number(id); // useParams()에서 나온 id는 문자열 -> 숫자로 바꿔야 함
   const navigate = useNavigate();
   const [animal, setAnimal] = useState<Animal | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchAnimal = async () => {
+      setLoading(true);
+
       const data = await getAnimalById(animalId);
 
       if (data) {
         setAnimal(data);
       }
+
+      setLoading(false);
     };
     fetchAnimal();
   }, [animalId]);
+
+  const renderAnimalDetail = () => {
+    if (loading) return <p>동물 정보를 불러오는 중입니다.</p>;
+    if (!animal) return <p>동물 정보를 찾을 수 없습니다.</p>;
+
+    return (
+      <div className="animal-detail">
+        <p>이름 : {animal.name}</p>
+        <p>종 : {animal.species}</p>
+        <p>부서 : {animal.department}</p>
+        <p>담당 사육사 : {animal.keeper}</p>
+        <p>나이 : {animal.age}살</p>
+        <p>등록일 : {animal.joinedDate}</p>
+      </div>
+    );
+  };
 
   return (
     <main className="page-content">
@@ -38,18 +59,9 @@ function AnimalDetailPage() {
           뒤로가기
         </button>
         <h2>동물 상세 정보</h2>
-        <p>선택한 동물의 상세 정보를 확인합니다.</p>
+        <p>선택한 동물 ID: {id}</p>
 
-        {animal ? (
-          <div>
-            <p>이름 : {animal.name}</p>
-            <p>종 : {animal.species}</p>
-            <p>부서 : {animal.department}</p>
-            <p>담당 사육사 : {animal.keeper}</p>
-          </div>
-        ) : (
-          <p>동물 정보를 불러오는 중입니다.</p>
-        )}
+        {renderAnimalDetail()}
       </section>
     </main>
   );
