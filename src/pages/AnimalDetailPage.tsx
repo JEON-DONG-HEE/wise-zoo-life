@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getAnimalById } from "../services/animalService";
 import type { Animal } from "../types/animal";
 import AnimalStatusBadge from "../components/AnimalStatusBadge";
+import CommonButton from "../components/CommonButton";
 
 function AnimalDetailPage() {
   const { id } = useParams();
@@ -56,13 +57,8 @@ function AnimalDetailPage() {
           목록 카드처럼 '링크 이동'은 Link,
           뒤로가기나 저장 후 이동처럼 '동작 후 이동'은 useNavigate
         */}
-        <button
-          type="button"
-          className="back-button"
-          onClick={() => navigate(-1)}
-        >
-          뒤로가기
-        </button>
+        <CommonButton onClick={() => navigate(-1)}>뒤로가기</CommonButton>
+
         <h2>동물 상세 정보</h2>
         <p>선택한 동물 ID: {id}</p>
 
