@@ -117,21 +117,36 @@
   text-decoration: none;
 }
 
-/* 카드 상세 : 뒤로가기 버튼 */
-.back-button {
+/* 버튼 */
+.common-button {
   margin-bottom: 16px;
   padding: 8px 14px;
   border: 1px solid #d0d5dd;
   border-radius: 8px;
-  background-color: #fff;
-  color: #333;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
 }
 
-.back-button:hover {
-  background-color: #f2f4f7;
+.common-button.primary {
+  background-color: #222;
+  border-color: #222;
+  color: #fff;
+}
+
+.common-button.secondary {
+  background-color: #fff;
+  color: #333;
+}
+
+.common-button.danger {
+  background-color: #ffe3e3;
+  border-color: #ffcccc;
+  color: #c92a2a;
+}
+
+.common-button:hover {
+  opacity: 0.9;
 }
 
 /* 동물 상세페이지 */
