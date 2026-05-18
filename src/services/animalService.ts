@@ -13,3 +13,12 @@ export const getAnimals = (): Promise<Animal[]> => {
     }, 500);
   });
 };
+
+// getAnimalById = async (id: number) -> 숫자 id를 받아서 동물 하나를 찾는 비동기 함수
+export const getAnimalById = async (
+  id: number,
+): Promise<Animal | undefined> => {
+  const animals = await getAnimals();
+
+  return animals.find((animal) => animal.id === id);
+};
