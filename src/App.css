@@ -118,6 +118,11 @@
 }
 
 /* 버튼 */
+/*
+primary   : 주요 버튼, 저장/확인
+secondary : 보조 버튼, 취소/뒤로가기
+danger    : 위험 버튼, 삭제
+*/
 .common-button {
   margin-bottom: 16px;
   padding: 8px 14px;
@@ -128,17 +133,20 @@
   cursor: pointer;
 }
 
+/* primary   : 주요 버튼, 저장/확인 */
 .common-button.primary {
   background-color: #222;
   border-color: #222;
   color: #fff;
 }
 
+/* secondary : 보조 버튼, 취소/뒤로가기 */
 .common-button.secondary {
   background-color: #fff;
   color: #333;
 }
 
+/* danger    : 위험 버튼, 삭제 */
 .common-button.danger {
   background-color: #ffe3e3;
   border-color: #ffcccc;
