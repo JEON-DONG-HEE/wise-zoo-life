@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
 function AnimalFormPage() {
   const [formValues, setFormValues] = useState({
@@ -7,6 +7,15 @@ function AnimalFormPage() {
     department: "",
     keeper: "",
   });
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   return (
     <div>
@@ -20,14 +29,10 @@ function AnimalFormPage() {
               <label htmlFor="name">동물이름</label>
               <input
                 id="name"
+                name="name"
                 type="text"
                 value={formValues.name}
-                onChange={(event) =>
-                  setFormValues({
-                    ...formValues, // 기존 입력값들은 유지한다
-                    name: event.target.value, // 그중 name 값만 새 입력값으로 바꾼다.
-                  })
-                }
+                onChange={handleChange}
                 placeholder="예: 레오"
               />
             </div>
@@ -35,14 +40,10 @@ function AnimalFormPage() {
               <label htmlFor="species">종</label>
               <input
                 id="species"
+                name="species"
                 type="text"
                 value={formValues.species}
-                onChange={(event) =>
-                  setFormValues({
-                    ...formValues,
-                    species: event.target.value,
-                  })
-                }
+                onChange={handleChange}
                 placeholder="예: 사자"
               />
             </div>
@@ -50,14 +51,10 @@ function AnimalFormPage() {
               <label htmlFor="department">부서</label>
               <input
                 id="department"
+                name="department"
                 type="text"
                 value={formValues.department}
-                onChange={(event) =>
-                  setFormValues({
-                    ...formValues,
-                    department: event.target.value,
-                  })
-                }
+                onChange={handleChange}
                 placeholder="예: 맹수팀"
               />
             </div>
@@ -65,14 +62,10 @@ function AnimalFormPage() {
               <label htmlFor="keeper">담당 사육사</label>
               <input
                 id="keeper"
+                name="keeper"
                 type="text"
                 value={formValues.keeper}
-                onChange={(event) =>
-                  setFormValues({
-                    ...formValues,
-                    keeper: event.target.value,
-                  })
-                }
+                onChange={handleChange}
                 placeholder="예: 김사육"
               />
             </div>
