@@ -217,3 +217,15 @@ danger    : 위험 버튼, 삭제
   margin: 0;
   color: #666;
 }
+
+/* 모달 속 버튼 */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.modal-actions .common-button {
+  margin-bottom: 0;
+}

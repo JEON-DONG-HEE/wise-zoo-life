@@ -83,7 +83,7 @@ function AnimalDetailPage() {
 
         {renderAnimalDetail()}
       </section>
-      {/* ModalOpen이 true일 때만 ConfirmModal을 보여줘라 */}
+      {/* 실무 많이 씀 : ModalOpen이 true일 때만 ConfirmModal을 보여줘라 */}
       {isDeleteModalOpen && <ConfirmModal />}{" "}
     </main>
   );
