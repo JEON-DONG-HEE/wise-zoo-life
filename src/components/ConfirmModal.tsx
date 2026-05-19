@@ -3,6 +3,8 @@ import CommonButton from "./CommonButton";
 type ConfirmModalProps = {
   title: string;
   message: string;
+  cancelText?: string;
+  confirmText?: string;
   onCancel: () => void;
   onConfirm: () => void;
 };
@@ -10,6 +12,8 @@ type ConfirmModalProps = {
 function ConfirmModal({
   title,
   message,
+  cancelText = "취소" /* 기본값 */,
+  confirmText = "확인" /* 값을 안넘기면 기본값 노출 */,
   onCancel,
   onConfirm,
 }: ConfirmModalProps) {
@@ -21,11 +25,11 @@ function ConfirmModal({
 
         <div className="modal-actions">
           <CommonButton variant="secondary" onClick={onCancel}>
-            취소
+            {cancelText}
           </CommonButton>
 
           <CommonButton variant="danger" onClick={onConfirm}>
-            삭제
+            {confirmText}
           </CommonButton>
         </div>
       </div>

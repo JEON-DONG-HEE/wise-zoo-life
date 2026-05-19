@@ -88,6 +88,8 @@ function AnimalDetailPage() {
         <ConfirmModal
           title="동물 정보 삭제"
           message="정말 이 동물 정보를 삭제하시겠습니까?"
+          cancelText="취소"
+          confirmText="삭제"
           onCancel={() => setIsDeleteModalOpen(false)}
           onConfirm={() => {
             alert("삭제되었습니다.");
