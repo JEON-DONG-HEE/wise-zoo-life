@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 function AnimalFormPage() {
+  const [formValues, setFormValues] = useState({
+    name: "",
+    species: "",
+    department: "",
+    keeper: "",
+  });
+
   return (
     <div>
       <main className="page-content">
@@ -9,19 +18,63 @@ function AnimalFormPage() {
           <form className="animal-form">
             <div className="form-field">
               <label htmlFor="name">동물이름</label>
-              <input id="name" type="text" placeholder="예: 레오" />
+              <input
+                id="name"
+                type="text"
+                value={formValues.name}
+                onChange={(event) =>
+                  setFormValues({
+                    ...formValues, // 기존 입력값들은 유지한다
+                    name: event.target.value, // 그중 name 값만 새 입력값으로 바꾼다.
+                  })
+                }
+                placeholder="예: 레오"
+              />
             </div>
             <div className="form-field">
               <label htmlFor="species">종</label>
-              <input id="species" type="text" placeholder="예: 사자" />
+              <input
+                id="species"
+                type="text"
+                value={formValues.species}
+                onChange={(event) =>
+                  setFormValues({
+                    ...formValues,
+                    species: event.target.value,
+                  })
+                }
+                placeholder="예: 사자"
+              />
             </div>
             <div className="form-field">
               <label htmlFor="department">부서</label>
-              <input id="department" type="text" placeholder="예: 맹수팀" />
+              <input
+                id="department"
+                type="text"
+                value={formValues.department}
+                onChange={(event) =>
+                  setFormValues({
+                    ...formValues,
+                    department: event.target.value,
+                  })
+                }
+                placeholder="예: 맹수팀"
+              />
             </div>
             <div className="form-field">
               <label htmlFor="keeper">담당 사육사</label>
-              <input id="keeper" type="text" placeholder="예: 김사육" />
+              <input
+                id="keeper"
+                type="text"
+                value={formValues.keeper}
+                onChange={(event) =>
+                  setFormValues({
+                    ...formValues,
+                    keeper: event.target.value,
+                  })
+                }
+                placeholder="예: 김사육"
+              />
             </div>
           </form>
         </section>
