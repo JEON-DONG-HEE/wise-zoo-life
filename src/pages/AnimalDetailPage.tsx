@@ -51,6 +51,12 @@ function AnimalDetailPage() {
     );
   };
 
+  const handleDeleteAnimal = () => {
+    alert("삭제되었습니다.");
+    setIsDeleteModalOpen(false);
+    navigate("/animals"); // 동물 목록 페이지로 이동
+  };
+
   return (
     <main className="page-content">
       <section className="summary-card">
@@ -90,11 +96,8 @@ function AnimalDetailPage() {
           message="정말 이 동물 정보를 삭제하시겠습니까?"
           cancelText="취소"
           confirmText="삭제"
-          onCancel={() => setIsDeleteModalOpen(false)}
-          onConfirm={() => {
-            alert("삭제되었습니다.");
-            setIsDeleteModalOpen(false);
-          }}
+          onCancel={() => setIsDeleteModalOpen(false)} // 간단한 동작일 때
+          onConfirm={handleDeleteAnimal} // 로직이 여러 줄일 때
         />
       )}
     </main>
