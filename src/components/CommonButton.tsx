@@ -27,7 +27,7 @@ function CommonButton({
   return (
     <button
       type="button"
-      className={`1common-button ${variant}`}
+      className={`common-button ${variant}`}
       onClick={onClick}
     >
       {children}

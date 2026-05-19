@@ -157,6 +157,13 @@ danger    : 위험 버튼, 삭제
   opacity: 0.9;
 }
 
+/* 테스트 : 버튼 */
+.button-test-area {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
 /* 동물 상세페이지 */
 .animal-detail {
   display: grid;

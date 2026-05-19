@@ -61,6 +61,18 @@ function AnimalDetailPage() {
           뒤로가기
         </CommonButton>
 
+        <div className="button-test-area">
+          <CommonButton variant="primary" onClick={() => alert("저장")}>
+            저장
+          </CommonButton>
+          <CommonButton variant="secondary" onClick={() => alert("취소")}>
+            취소
+          </CommonButton>
+          <CommonButton variant="danger" onClick={() => alert("삭제")}>
+            삭제
+          </CommonButton>
+        </div>
+
         <h2>동물 상세 정보</h2>
         <p>선택한 동물 ID: {id}</p>
 
