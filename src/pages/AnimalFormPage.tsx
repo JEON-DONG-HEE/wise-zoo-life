@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
 function AnimalFormPage() {
   const [formValues, setFormValues] = useState({
@@ -8,6 +8,7 @@ function AnimalFormPage() {
     keeper: "",
   });
 
+  // 폼 입력값 저장
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -17,6 +18,12 @@ function AnimalFormPage() {
     });
   };
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log("등록할 동물 데이터 : ", formValues);
+  };
+
   return (
     <div>
       <main className="page-content">
@@ -24,7 +31,8 @@ function AnimalFormPage() {
           <h2>동물 등록</h2>
           <p>새로운 동물 정보를 등록합니다.</p>
 
-          <form className="animal-form">
+          {/* 폼 안에서 submit 이 발생하면 handleSubmit 함수 실행 */}
+          <form className="animal-form" onSubmit={handleSubmit}>
             <div className="form-field">
               <label htmlFor="name">동물이름</label>
               <input
@@ -68,6 +76,10 @@ function AnimalFormPage() {
                 onChange={handleChange}
                 placeholder="예: 김사육"
               />
+            </div>
+            <div className="form-actions">
+              {/* type="submit" submit 이벤트 발생 */}
+              <button type="submit">저장</button>
             </div>
           </form>
         </section>

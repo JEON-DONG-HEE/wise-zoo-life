@@ -270,3 +270,21 @@ danger    : 위험 버튼, 삭제
   outline: none;
   border-color: #222;
 }
+
+/* 폼 서브밋 버튼 */
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.form-actions button {
+  padding: 8px 14px;
+  border: 1px solid #222;
+  border-radius: 8px;
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
