@@ -229,3 +229,14 @@ danger    : 위험 버튼, 삭제
 .modal-actions .common-button {
   margin-bottom: 0;
 }
+
+/* 상세페이지 버튼 */
+.detail-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.detail-actions .common-button {
+  margin-bottom: 0;
+}

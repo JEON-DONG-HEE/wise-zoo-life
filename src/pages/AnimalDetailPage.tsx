@@ -65,16 +65,10 @@ function AnimalDetailPage() {
           목록 카드처럼 '링크 이동'은 Link,
           뒤로가기나 저장 후 이동처럼 '동작 후 이동'은 useNavigate
         */}
-        <CommonButton variant="secondary" onClick={() => navigate(-1)}>
-          뒤로가기
-        </CommonButton>
 
-        <div className="button-test-area">
-          <CommonButton variant="primary" onClick={() => alert("저장")}>
-            저장
-          </CommonButton>
-          <CommonButton variant="secondary" onClick={() => alert("취소")}>
-            취소
+        <div className="detail-actions">
+          <CommonButton variant="secondary" onClick={() => navigate(-1)}>
+            뒤로가기
           </CommonButton>
           <CommonButton
             variant="danger"
