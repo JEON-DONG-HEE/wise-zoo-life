@@ -86,6 +86,8 @@ function AnimalDetailPage() {
       {/* isDeleteModalOpen && <ConfirmModal /> 실무 많이 씀 : ModalOpen이 true일 때만 ConfirmModal을 보여줘라 */}
       {isDeleteModalOpen && (
         <ConfirmModal
+          title="동물 정보 삭제"
+          message="정말 이 동물 정보를 삭제하시겠습니까?"
           onCancel={() => setIsDeleteModalOpen(false)}
           onConfirm={() => {
             alert("삭제되었습니다.");

@@ -1,16 +1,23 @@
 import CommonButton from "./CommonButton";
 
 type ConfirmModalProps = {
+  title: string;
+  message: string;
   onCancel: () => void;
   onConfirm: () => void;
 };
 
-function ConfirmModal({ onCancel, onConfirm }: ConfirmModalProps) {
+function ConfirmModal({
+  title,
+  message,
+  onCancel,
+  onConfirm,
+}: ConfirmModalProps) {
   return (
     <div className="modal-backdrop">
       <div className="modal-box">
-        <h3>확인</h3>
-        <p>정말 삭제하시겠습니까?</p>
+        <h3>{title}</h3>
+        <p>{message}</p>
 
         <div className="modal-actions">
           <CommonButton variant="secondary" onClick={onCancel}>
