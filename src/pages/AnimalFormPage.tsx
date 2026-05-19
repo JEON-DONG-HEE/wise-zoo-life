@@ -1,4 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import CommonButton from "../components/CommonButton";
 
 function AnimalFormPage() {
   const [formValues, setFormValues] = useState({
@@ -7,6 +9,7 @@ function AnimalFormPage() {
     department: "",
     keeper: "",
   });
+  const navigate = useNavigate();
 
   // 폼 입력값 저장
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -78,8 +81,15 @@ function AnimalFormPage() {
               />
             </div>
             <div className="form-actions">
-              {/* type="submit" submit 이벤트 발생 */}
-              <button type="submit">저장</button>
+              <CommonButton variant="primary" type="submit">
+                저장
+              </CommonButton>
+
+              {/* 폼 안에 있는 버튼은 기본적으로 submit처럼 동작할 수 있어서, 취소 버튼은 반드시 type="button"이어야 함
+              CommonButton 컴포넌트에서 type 기본 값이 button 이므로 아래처럼 type 을 지정하지 않아도 동작함   */}
+              <CommonButton variant="secondary" onClick={() => navigate(-1)}>
+                취소
+              </CommonButton>
             </div>
           </form>
         </section>
