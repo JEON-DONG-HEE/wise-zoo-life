@@ -14,6 +14,7 @@ function AnimalDetailPage() {
   const navigate = useNavigate();
   const [animal, setAnimal] = useState<Animal | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -69,7 +70,10 @@ function AnimalDetailPage() {
           <CommonButton variant="secondary" onClick={() => alert("취소")}>
             취소
           </CommonButton>
-          <CommonButton variant="danger" onClick={() => alert("삭제")}>
+          <CommonButton
+            variant="danger"
+            onClick={() => setIsDeleteModalOpen(true)}
+          >
             삭제
           </CommonButton>
         </div>
@@ -79,8 +83,8 @@ function AnimalDetailPage() {
 
         {renderAnimalDetail()}
       </section>
-
-      <ConfirmModal />
+      {/* ModalOpen이 true일 때만 ConfirmModal을 보여줘라 */}
+      {isDeleteModalOpen && <ConfirmModal />}{" "}
     </main>
   );
 }
