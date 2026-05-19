@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CommonButton from "../components/CommonButton";
 
@@ -8,11 +8,16 @@ function AnimalFormPage() {
     species: "",
     department: "",
     keeper: "",
+    age: "", // age를 숫자가 아니라 일단 문자열 ""로 둔 이유는, input에서 들어오는 값은 기본적으로 문자열이기 때문
+    status: "",
+    joinedDate: "",
   });
   const navigate = useNavigate();
 
   // 폼 입력값 저장
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>, // input change 이벤트도 받고 select change 이벤트도 받겠다
+  ) => {
     const { name, value } = event.target;
 
     setFormValues({
@@ -21,7 +26,7 @@ function AnimalFormPage() {
     });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     console.log("등록할 동물 데이터 : ", formValues);
@@ -78,6 +83,40 @@ function AnimalFormPage() {
                 value={formValues.keeper}
                 onChange={handleChange}
                 placeholder="예: 김사육"
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="age">나이</label>
+              <input
+                id="age"
+                name="age"
+                type="number"
+                value={formValues.age}
+                onChange={handleChange}
+                placeholder="예: 8"
+              />
+            </div>
+            <div className="form-field">
+              <label htmlFor="status">상태</label>
+              <select
+                id="status"
+                name="status"
+                value={formValues.status}
+                onChange={handleChange}
+              >
+                <option value="ACTIVE">관리중</option>
+                <option value="RESTING">휴식중</option>
+                <option value="TRANSFERRED">이동완료</option>
+              </select>
+            </div>
+            <div className="form-field">
+              <label htmlFor="joinedDate">등록일</label>
+              <input
+                id="joinedDate"
+                name="joinedDate"
+                type="date"
+                value={formValues.joinedDate}
+                onChange={handleChange}
               />
             </div>
             <div className="form-actions">

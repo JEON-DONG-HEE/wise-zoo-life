@@ -259,14 +259,16 @@ danger    : 위험 버튼, 삭제
   color: #333;
 }
 
-.form-field input {
+.form-field input,
+.form-field select {
   padding: 10px 12px;
   border: 1px solid #d0d5dd;
   border-radius: 8px;
   font-size: 14px;
 }
 
-.form-field input:focus {
+.form-field input:focus,
+.form-field select:focus {
   outline: none;
   border-color: #222;
 }
