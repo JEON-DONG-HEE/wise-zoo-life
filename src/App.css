@@ -240,3 +240,33 @@ danger    : 위험 버튼, 삭제
 .detail-actions .common-button {
   margin-bottom: 0;
 }
+
+/* 동물 등록 폼 */
+.animal-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+}
+
+.form-field input {
+  padding: 10px 12px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: #222;
+}
