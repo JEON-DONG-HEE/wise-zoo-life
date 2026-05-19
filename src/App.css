@@ -187,3 +187,33 @@ danger    : 위험 버튼, 삭제
   background-color: #f8f9fb;
   border-radius: 8px;
 }
+
+/* 모달 공통 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.modal-box p {
+  margin: 0;
+  color: #666;
+}

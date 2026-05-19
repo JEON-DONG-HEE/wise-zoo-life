@@ -6,6 +6,7 @@ import { getAnimalById } from "../services/animalService";
 import type { Animal } from "../types/animal";
 import AnimalStatusBadge from "../components/AnimalStatusBadge";
 import CommonButton from "../components/CommonButton";
+import ConfirmModal from "../components/ConfirmModal";
 
 function AnimalDetailPage() {
   const { id } = useParams();
@@ -78,6 +79,8 @@ function AnimalDetailPage() {
 
         {renderAnimalDetail()}
       </section>
+
+      <ConfirmModal />
     </main>
   );
 }
