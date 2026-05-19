@@ -83,8 +83,16 @@ function AnimalDetailPage() {
 
         {renderAnimalDetail()}
       </section>
-      {/* 실무 많이 씀 : ModalOpen이 true일 때만 ConfirmModal을 보여줘라 */}
-      {isDeleteModalOpen && <ConfirmModal />}{" "}
+      {/* isDeleteModalOpen && <ConfirmModal /> 실무 많이 씀 : ModalOpen이 true일 때만 ConfirmModal을 보여줘라 */}
+      {isDeleteModalOpen && (
+        <ConfirmModal
+          onCancel={() => setIsDeleteModalOpen(false)}
+          onConfirm={() => {
+            alert("삭제되었습니다.");
+            setIsDeleteModalOpen(false);
+          }}
+        />
+      )}
     </main>
   );
 }
