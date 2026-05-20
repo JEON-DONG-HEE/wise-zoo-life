@@ -1,15 +1,26 @@
 import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CommonButton from "../components/CommonButton";
+import type { Animal, AnimalStatus } from "../types/animal";
+
+type AnimalFormValues = {
+  name: string;
+  species: string;
+  department: string;
+  keeper: string;
+  age: string;
+  status: AnimalStatus;
+  joinedDate: string;
+};
 
 function AnimalFormPage() {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<AnimalFormValues>({
     name: "",
     species: "",
     department: "",
     keeper: "",
     age: "", // age를 숫자가 아니라 일단 문자열 ""로 둔 이유는, input에서 들어오는 값은 기본적으로 문자열이기 때문
-    status: "",
+    status: "ACTIVE",
     joinedDate: "",
   });
   const navigate = useNavigate();
@@ -29,7 +40,20 @@ function AnimalFormPage() {
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("등록할 동물 데이터 : ", formValues);
+    // console.log("등록할 동물 데이터 : ", formValues);
+
+    const newAnimal: Animal = {
+      id: Date.now(),
+      name: formValues.name,
+      species: formValues.species,
+      department: formValues.department,
+      keeper: formValues.keeper,
+      age: Number(formValues.age), // 입력창에서 들어온 string 을 Number 로 바꿈
+      status: formValues.status,
+      joinedDate: formValues.joinedDate,
+    };
+
+    console.log("등록할 동물 데이터 : ", newAnimal);
   };
 
   return (
