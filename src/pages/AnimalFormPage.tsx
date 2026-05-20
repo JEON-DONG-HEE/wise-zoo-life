@@ -41,12 +41,7 @@ function AnimalFormPage() {
     });
   };
 
-  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault(); // submit 할 때 기본 새로고침 막기
-    // console.log("등록할 동물 데이터 : ", formValues);
-
-    setError("");
-
+  const validateForm = () => {
     // trim()은 앞뒤 공백을 제거하는 함수, 공백만 입력한 것도 막을 수 있음
     if (!formValues.name.trim()) {
       setError("동물 이름을 입력해주세요.");
@@ -80,15 +75,26 @@ function AnimalFormPage() {
       return;
     }
 
-    if (!formValues.status.trim()) {
-      setError("동물 이름을 입력해주세요.");
-      return;
-    }
-
     if (!formValues.joinedDate.trim()) {
       setError("등록일을 입력해주세요.");
       return;
     }
+
+    return ""; // 문제가 있으면 에러 메시지 문자열 반환, 없으면 빈 문자열 반환
+  };
+
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault(); // submit 할 때 기본 새로고침 막기
+    // console.log("등록할 동물 데이터 : ", formValues);
+
+    setError("");
+    const validationMessage = validateForm();
+    if (validationMessage) {
+      setError(validationMessage);
+      return;
+    }
+
+    const ageNumber = Number(formValues.age); // 입력창에서 들어온 string 을 Number 로 바꿈
 
     // 저장 중 에러가 나면 setSubmitting(false) 가 실행되지 않을 수 있어서 try/finally 사용
     try {
