@@ -25,6 +25,7 @@ function AnimalFormPage() {
     status: "ACTIVE",
     joinedDate: "",
   });
+  const [submitting, setSubmitting] = useState(false); // 저장 중 state 추가, submitting : 저장 중인지 여부
   const navigate = useNavigate();
 
   // 폼 입력값 저장
@@ -41,27 +42,33 @@ function AnimalFormPage() {
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault(); // submit 할 때 기본 새로고침 막기
-
     // console.log("등록할 동물 데이터 : ", formValues);
 
-    const newAnimal: Animal = {
-      id: Date.now(),
-      name: formValues.name,
-      species: formValues.species,
-      department: formValues.department,
-      keeper: formValues.keeper,
-      age: Number(formValues.age), // 입력창에서 들어온 string 을 Number 로 바꿈
-      status: formValues.status,
-      joinedDate: formValues.joinedDate,
-    };
+    // 저장 중 에러가 나면 setSubmitting(false) 가 실행되지 않을 수 있어서 try/finally 사용
+    try {
+      setSubmitting(true);
 
-    // console.log("등록할 동물 데이터 : ", newAnimal);
+      const newAnimal: Animal = {
+        id: Date.now(),
+        name: formValues.name,
+        species: formValues.species,
+        department: formValues.department,
+        keeper: formValues.keeper,
+        age: Number(formValues.age), // 입력창에서 들어온 string 을 Number 로 바꿈
+        status: formValues.status,
+        joinedDate: formValues.joinedDate,
+      };
 
-    // 등록 폼 submit 시 addAnimal 호출
-    const savedAnimal = await addAnimal(newAnimal);
-    console.log("저장 완료 : ", savedAnimal);
-    alert("동물 정보가 등록되었습니다.");
-    navigate("/animals"); // 저장 완료 후 목록 이동
+      // console.log("등록할 동물 데이터 : ", newAnimal);
+
+      // 등록 폼 submit 시 addAnimal 호출
+      const savedAnimal = await addAnimal(newAnimal);
+      console.log("저장 완료 : ", savedAnimal);
+      alert("동물 정보가 등록되었습니다.");
+      navigate("/animals"); // 저장 완료 후 목록 이동
+    } finally {
+      setSubmitting(false); // 성공/실패와 관계없이 submitting false
+    }
   };
 
   return (
@@ -153,7 +160,7 @@ function AnimalFormPage() {
             </div>
             <div className="form-actions">
               <CommonButton variant="primary" type="submit">
-                저장
+                {submitting ? "저장 중..." : "저장"}
               </CommonButton>
 
               {/* 폼 안에 있는 버튼은 기본적으로 submit처럼 동작할 수 있어서, 취소 버튼은 반드시 type="button"이어야 함
