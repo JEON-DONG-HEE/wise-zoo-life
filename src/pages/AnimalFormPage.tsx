@@ -25,8 +25,9 @@ function AnimalFormPage() {
     status: "ACTIVE",
     joinedDate: "",
   });
-  const [submitting, setSubmitting] = useState(false); // 저장 중 state 추가, submitting : 저장 중인지 여부
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false); // 저장 중 state 추가, submitting : 저장 중인지 여부
+  const [error, setError] = useState("");
 
   // 폼 입력값 저장
   const handleChange = (
@@ -44,6 +45,51 @@ function AnimalFormPage() {
     event.preventDefault(); // submit 할 때 기본 새로고침 막기
     // console.log("등록할 동물 데이터 : ", formValues);
 
+    setError("");
+
+    // trim()은 앞뒤 공백을 제거하는 함수, 공백만 입력한 것도 막을 수 있음
+    if (!formValues.name.trim()) {
+      setError("동물 이름을 입력해주세요.");
+      return;
+    }
+
+    if (!formValues.species.trim()) {
+      setError("종을 입력해주세요.");
+      return;
+    }
+
+    if (!formValues.department.trim()) {
+      setError("부서를 입력해주세요.");
+      return;
+    }
+
+    if (!formValues.keeper.trim()) {
+      setError("담당 사육사를 입력해주세요.");
+      return;
+    }
+
+    if (!formValues.age.trim()) {
+      setError("나이를 입력해주세요.");
+      return;
+    }
+
+    const ageNumber = Number(formValues.age); // 입력창에서 들어온 string 을 Number 로 바꿈
+
+    if (Number.isNaN(ageNumber) || ageNumber <= 0) {
+      setError("나이는 1 이상의 숫자로 입력해주세요.");
+      return;
+    }
+
+    if (!formValues.status.trim()) {
+      setError("동물 이름을 입력해주세요.");
+      return;
+    }
+
+    if (!formValues.joinedDate.trim()) {
+      setError("등록일을 입력해주세요.");
+      return;
+    }
+
     // 저장 중 에러가 나면 setSubmitting(false) 가 실행되지 않을 수 있어서 try/finally 사용
     try {
       setSubmitting(true);
@@ -54,7 +100,7 @@ function AnimalFormPage() {
         species: formValues.species,
         department: formValues.department,
         keeper: formValues.keeper,
-        age: Number(formValues.age), // 입력창에서 들어온 string 을 Number 로 바꿈
+        age: ageNumber,
         status: formValues.status,
         joinedDate: formValues.joinedDate,
       };
@@ -77,6 +123,8 @@ function AnimalFormPage() {
         <section className="summary-card">
           <h2>동물 등록</h2>
           <p>새로운 동물 정보를 등록합니다.</p>
+
+          {error && <p className="error-message">{error}</p>}
 
           {/* 폼 안에서 submit 이 발생하면 handleSubmit 함수 실행 */}
           <form className="animal-form" onSubmit={handleSubmit}>
