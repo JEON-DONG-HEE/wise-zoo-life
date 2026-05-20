@@ -169,7 +169,11 @@ function AnimalFormPage() {
 
               {/* 폼 안에 있는 버튼은 기본적으로 submit처럼 동작할 수 있어서, 취소 버튼은 반드시 type="button"이어야 함
               CommonButton 컴포넌트에서 type 기본 값이 button 이므로 아래처럼 type 을 지정하지 않아도 동작함   */}
-              <CommonButton variant="secondary" onClick={() => navigate(-1)}>
+              <CommonButton
+                variant="secondary"
+                onClick={() => navigate(-1)}
+                disabled={submitting} // 저장 중이면 취소 버튼도 비활성화
+              >
                 취소
               </CommonButton>
             </div>
