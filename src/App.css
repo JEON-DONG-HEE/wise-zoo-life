@@ -133,6 +133,11 @@ danger    : 위험 버튼, 삭제
   cursor: pointer;
 }
 
+.common-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* primary   : 주요 버튼, 저장/확인 */
 .common-button.primary {
   background-color: #222;

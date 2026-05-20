@@ -159,7 +159,11 @@ function AnimalFormPage() {
               />
             </div>
             <div className="form-actions">
-              <CommonButton variant="primary" type="submit">
+              <CommonButton
+                variant="primary"
+                type="submit"
+                disabled={submitting} // boolean 값이면 삼항연산자로 true/false를 다시 만들 필요 없음, 그 값 자체를 넣으면 됨
+              >
                 {submitting ? "저장 중..." : "저장"}
               </CommonButton>
 

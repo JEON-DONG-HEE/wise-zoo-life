@@ -18,6 +18,7 @@ type CommonButtonProps = {
   onClick?: () => void; // onClick? -> submit 버튼은 onClick 없이도 쓸 수 있으니까
   variant?: ButtonVariant; // ? -> variant 는 있어도 되고 없어도 된다
   type?: "button" | "submit";
+  disabled?: boolean;
 };
 
 function CommonButton({
@@ -25,12 +26,14 @@ function CommonButton({
   onClick,
   variant = "secondary", // variant 를 따로 안넘기면 기본값은 secondary 이다
   type = "button",
+  disabled = false,
 }: CommonButtonProps) {
   return (
     <button
       type={type}
       className={`common-button ${variant}`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
