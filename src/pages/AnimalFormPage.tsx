@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CommonButton from "../components/CommonButton";
 import type { Animal, AnimalStatus } from "../types/animal";
 
+// 폼에 입력될 값들의 형태를 미리 정해둔 타입
 type AnimalFormValues = {
   name: string;
   species: string;
@@ -38,7 +39,7 @@ function AnimalFormPage() {
   };
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault(); // submit 할 때 기본 새로고침 막기
 
     // console.log("등록할 동물 데이터 : ", formValues);
 
