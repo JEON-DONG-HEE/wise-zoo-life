@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CommonButton from "../components/CommonButton";
 import type { Animal, AnimalStatus } from "../types/animal";
+import { addAnimal } from "../services/animalService";
 
 // 폼에 입력될 값들의 형태를 미리 정해둔 타입
 type AnimalFormValues = {
@@ -38,7 +39,7 @@ function AnimalFormPage() {
     });
   };
 
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault(); // submit 할 때 기본 새로고침 막기
 
     // console.log("등록할 동물 데이터 : ", formValues);
@@ -54,7 +55,13 @@ function AnimalFormPage() {
       joinedDate: formValues.joinedDate,
     };
 
-    console.log("등록할 동물 데이터 : ", newAnimal);
+    // console.log("등록할 동물 데이터 : ", newAnimal);
+
+    // 등록 폼 submit 시 addAnimal 호출
+    const savedAnimal = await addAnimal(newAnimal);
+    console.log("저장 완료 : ", savedAnimal);
+    alert("동물 정보가 등록되었습니다.");
+    navigate("/animals"); // 저장 완료 후 목록 이동
   };
 
   return (

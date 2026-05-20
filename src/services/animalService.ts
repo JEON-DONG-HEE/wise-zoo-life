@@ -22,3 +22,31 @@ export const getAnimalById = async (
 
   return animals.find((animal) => animal.id === id);
 };
+
+// 실제 API가 붙을 경우
+/*
+// 동물 등록 저장 함수 추가
+export const addAnimal = async (animal: Animal): Promise<Animal> => {
+  const response = await fetch("/api/animals", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(animal),
+  });
+
+  return response.json();
+};
+*/
+
+// 테스트용
+// Promise<Animal> -> 저장이 끝나면 저장된 Animal 데이터를 돌려준다
+// 동물 등록 저장 함수 추가
+export const addAnimal = async (animal: Animal): Promise<Animal> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("저장된 동물 데이터 : ", animal);
+      resolve(animal);
+    }, 500);
+  });
+};
