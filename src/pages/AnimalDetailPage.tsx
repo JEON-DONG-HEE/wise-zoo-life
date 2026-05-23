@@ -15,6 +15,7 @@ function AnimalDetailPage() {
   const [animal, setAnimal] = useState<Animal | null>(null);
   const [loading, setLoading] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -52,13 +53,20 @@ function AnimalDetailPage() {
   };
 
   const handleDeleteAnimal = async () => {
-    console.log("삭제할 아이디 :", animalId);
+    // try finally 사용 이유 : 삭제 중 에러가 나면 deleting 이 계속 true 로 남을 수 있음
+    try {
+      setDeleting(true);
 
-    await deleteAnimal(animalId); // 삭제 완료를 먼저 기다려야 함
+      console.log("삭제할 아이디 :", animalId);
 
-    alert("삭제되었습니다.");
-    setIsDeleteModalOpen(false);
-    navigate("/animals"); // 동물 목록 페이지로 이동
+      await deleteAnimal(animalId); // 삭제 완료를 먼저 기다려야 함
+
+      alert("삭제되었습니다.");
+      setIsDeleteModalOpen(false);
+      navigate("/animals"); // 동물 목록 페이지로 이동
+    } finally {
+      setDeleting(false);
+    }
   };
 
   return (
@@ -93,7 +101,7 @@ function AnimalDetailPage() {
           title="동물 정보 삭제"
           message="정말 이 동물 정보를 삭제하시겠습니까?"
           cancelText="취소"
-          confirmText="삭제"
+          confirmText={deleting ? "삭제중..." : "삭제"}
           onCancel={() => setIsDeleteModalOpen(false)} // 간단한 동작일 때
           onConfirm={handleDeleteAnimal} // 로직이 여러 줄일 때
         />
