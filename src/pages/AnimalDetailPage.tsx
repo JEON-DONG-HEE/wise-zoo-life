@@ -2,7 +2,7 @@
 /* useNavigate 는 코드로 페이지 이동할 때 쓰는 기능 */
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAnimalById } from "../services/animalService";
+import { deleteAnimal, getAnimalById } from "../services/animalService";
 import type { Animal } from "../types/animal";
 import AnimalStatusBadge from "../components/AnimalStatusBadge";
 import CommonButton from "../components/CommonButton";
@@ -51,7 +51,11 @@ function AnimalDetailPage() {
     );
   };
 
-  const handleDeleteAnimal = () => {
+  const handleDeleteAnimal = async () => {
+    console.log("삭제할 아이디 :", animalId);
+
+    await deleteAnimal(animalId); // 삭제 완료를 먼저 기다려야 함
+
     alert("삭제되었습니다.");
     setIsDeleteModalOpen(false);
     navigate("/animals"); // 동물 목록 페이지로 이동
