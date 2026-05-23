@@ -6,6 +6,8 @@ type ConfirmModalProps = {
   message: string;
   cancelText?: string;
   confirmText?: string;
+  cancelDisabled?: boolean;
+  confirmDisabled?: boolean;
   onCancel: () => void;
   onConfirm: () => void;
 };
@@ -15,6 +17,8 @@ function ConfirmModal({
   message,
   cancelText = "취소" /* 기본값 */,
   confirmText = "확인" /* 값을 안넘기면 기본값 노출 */,
+  cancelDisabled = false,
+  confirmDisabled = false,
   onCancel,
   onConfirm,
 }: ConfirmModalProps) {
@@ -41,11 +45,19 @@ function ConfirmModal({
         <p>{message}</p>
 
         <div className="modal-actions">
-          <CommonButton variant="secondary" onClick={onCancel}>
+          <CommonButton
+            variant="secondary"
+            onClick={onCancel}
+            disabled={cancelDisabled}
+          >
             {cancelText}
           </CommonButton>
 
-          <CommonButton variant="danger" onClick={onConfirm}>
+          <CommonButton
+            variant="danger"
+            onClick={onConfirm}
+            disabled={confirmDisabled}
+          >
             {confirmText}
           </CommonButton>
         </div>

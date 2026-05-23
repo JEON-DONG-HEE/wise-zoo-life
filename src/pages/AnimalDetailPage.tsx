@@ -102,8 +102,10 @@ function AnimalDetailPage() {
           message="정말 이 동물 정보를 삭제하시겠습니까?"
           cancelText="취소"
           confirmText={deleting ? "삭제중..." : "삭제"}
-          onCancel={() => setIsDeleteModalOpen(false)} // 간단한 동작일 때
-          onConfirm={handleDeleteAnimal} // 로직이 여러 줄일 때
+          cancelDisabled={deleting}
+          confirmDisabled={deleting}
+          onCancel={() => setIsDeleteModalOpen(false)}
+          onConfirm={handleDeleteAnimal}
         />
       )}
     </main>
