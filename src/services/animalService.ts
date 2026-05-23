@@ -1,6 +1,10 @@
 import { animalData } from "../data/animalData";
 import type { Animal } from "../types/animal";
 
+let animals = [...animalData];
+
+console.log("애니멀 데이터 : ", animals);
+
 // (): Promise<Animal[]> 이 함수는 나중에 Animal 배열을 반환하는 Promise다.
 export const getAnimals = (): Promise<Animal[]> => {
   // 지금 바로 데이터를 주지 않고, 나중에 데이터를 줄게
@@ -9,7 +13,7 @@ export const getAnimals = (): Promise<Animal[]> => {
     // 0.5초 뒤에 animalData를 반환 완료 처리
     setTimeout(() => {
       // reject(new Error("API Error Test")); // 에러 테스트
-      resolve(animalData);
+      resolve(animals);
     }, 500);
   });
 };
@@ -45,6 +49,8 @@ export const addAnimal = async (animal: Animal): Promise<Animal> => {
 export const addAnimal = async (animal: Animal): Promise<Animal> => {
   return new Promise((resolve) => {
     setTimeout(() => {
+      animals = [animal, ...animals]; // 새 동물을 맨 앞에 추가 후 기존 동물은 뒤에 붙임
+
       console.log("저장된 동물 데이터 : ", animal);
       resolve(animal);
     }, 500);
