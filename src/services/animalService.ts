@@ -22,9 +22,9 @@ export const getAnimals = (): Promise<Animal[]> => {
 export const getAnimalById = async (
   id: number,
 ): Promise<Animal | undefined> => {
-  const animals = await getAnimals();
+  const animalList = await getAnimals();
 
-  return animals.find((animal) => animal.id === id);
+  return animalList.find((animal) => animal.id === id);
 };
 
 // 실제 API가 붙을 경우
@@ -51,7 +51,7 @@ export const addAnimal = async (animal: Animal): Promise<Animal> => {
     setTimeout(() => {
       animals = [animal, ...animals]; // 새 동물을 맨 앞에 추가 후 기존 동물은 뒤에 붙임
 
-      console.log("저장된 동물 데이터 : ", animal);
+      console.log("현재 동물 목록 : ", animals);
       resolve(animal);
     }, 500);
   });
