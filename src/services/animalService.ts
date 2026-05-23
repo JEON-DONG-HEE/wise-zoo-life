@@ -58,8 +58,13 @@ export const addAnimal = async (animal: Animal): Promise<Animal> => {
 };
 
 export const deleteAnimal = async (id: number): Promise<number> => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
+      // 삭제 실패 테스트
+      /*
+      reject(new Error("삭제 실패 테스트"));
+      return;
+      */
       animals = animals.filter((animal) => animal.id !== id);
 
       console.log("삭제된 동물 ID:", id);

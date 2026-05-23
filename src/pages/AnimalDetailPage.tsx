@@ -16,6 +16,7 @@ function AnimalDetailPage() {
   const [loading, setLoading] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -56,14 +57,15 @@ function AnimalDetailPage() {
     // try finally 사용 이유 : 삭제 중 에러가 나면 deleting 이 계속 true 로 남을 수 있음
     try {
       setDeleting(true);
-
-      console.log("삭제할 아이디 :", animalId);
+      setDeleteError("");
 
       await deleteAnimal(animalId); // 삭제 완료를 먼저 기다려야 함
 
       alert("삭제되었습니다.");
       setIsDeleteModalOpen(false);
       navigate("/animals"); // 동물 목록 페이지로 이동
+    } catch {
+      setDeleteError("삭제 중 문제가 발생했습니다.");
     } finally {
       setDeleting(false);
     }
@@ -104,6 +106,7 @@ function AnimalDetailPage() {
           confirmText={deleting ? "삭제중..." : "삭제"}
           cancelDisabled={deleting}
           confirmDisabled={deleting}
+          errorMessage={deleteError}
           onCancel={() => setIsDeleteModalOpen(false)}
           onConfirm={handleDeleteAnimal}
         />

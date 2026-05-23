@@ -8,6 +8,7 @@ type ConfirmModalProps = {
   confirmText?: string;
   cancelDisabled?: boolean;
   confirmDisabled?: boolean;
+  errorMessage?: string;
   onCancel: () => void;
   onConfirm: () => void;
 };
@@ -19,6 +20,7 @@ function ConfirmModal({
   confirmText = "확인" /* 값을 안넘기면 기본값 노출 */,
   cancelDisabled = false,
   confirmDisabled = false,
+  errorMessage = "",
   onCancel,
   onConfirm,
 }: ConfirmModalProps) {
@@ -43,6 +45,8 @@ function ConfirmModal({
       <div className="modal-box" onClick={(event) => event.stopPropagation()}>
         <h3>{title}</h3>
         <p>{message}</p>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <div className="modal-actions">
           <CommonButton
