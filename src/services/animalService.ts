@@ -74,3 +74,21 @@ export const deleteAnimal = async (id: number): Promise<number> => {
     }, 500);
   });
 };
+
+export const updateAnimal = async (
+  id: number,
+  updatedAnimal: Animal,
+): Promise<Animal> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      animals = animals.map((animal) =>
+        animal.id === id ? updatedAnimal : animal,
+      );
+
+      console.log("수정된 동물 데이터 : ", updatedAnimal);
+      console.log("수정 후 동물 목록 : ", animals);
+
+      resolve(updatedAnimal);
+    }, 500);
+  });
+};
