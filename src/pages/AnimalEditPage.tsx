@@ -33,6 +33,7 @@ function AnimalEditPage() {
     status: "ACTIVE",
     joinedDate: "",
   });
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -71,7 +72,40 @@ function AnimalEditPage() {
     });
   };
 
-  // 수정용 동물 데이터를 만드는 함수
+  // 유효성 검사 함수
+  const validateForm = () => {
+    // 이름 앞뒤 공백을 제거했는데 빈 값이면 에러 메시지를 반환한다.
+    if (!formValues.name.trim()) {
+      return "동물 이름을 입력해주세요.";
+    }
+    if (!formValues.species.trim()) {
+      return "종을 입력해주세요.";
+    }
+    if (!formValues.department.trim()) {
+      return "부서를 입력해주세요.";
+    }
+    if (!formValues.keeper.trim()) {
+      return "담당 사육사를 입력해주세요.";
+    }
+
+    // 빈 값 검사 먼저
+    if (!formValues.age.trim()) {
+      return "나이를 입력해주세요.";
+    }
+    // 빈 값 검사 후 숫자로 변환, 오류 검사 로직 추가
+    const ageNumber = Number(formValues.age);
+    if (Number.isNaN(ageNumber) || ageNumber <= 0) {
+      return "나이는 1 이상의 숫자로 입력해주세요.";
+    }
+
+    if (!formValues.joinedDate) {
+      return "등록일을 선택해주세요.";
+    }
+
+    return "";
+  };
+
+  // 수정용 데이터 생성 함수
   const createUpdatedAnimalData = (): Animal => {
     return {
       id: animalId,
@@ -85,12 +119,23 @@ function AnimalEditPage() {
     };
   };
 
+  // submit 함수
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const updatedAnimal = createUpdatedAnimalData();
+    setError(""); // 이전 에러 초기화
 
-    console.log("수정할 폼 데이터 : ", updatedAnimal);
+    const validationMessage = validateForm(); // 입력값 검사
+
+    // 에러 메시지가 있으면 저장을 막는다
+    if (validationMessage) {
+      setError(validationMessage); // 에러 표시
+      return; // 저장 중단
+    }
+
+    const updatedAnimal = createUpdatedAnimalData(); // 저장용 데이터 생성
+
+    console.log("수정할 폼 데이터 : ", updatedAnimal); // 확인
   };
 
   return (
@@ -174,6 +219,9 @@ function AnimalEditPage() {
               onChange={handleChange}
             />
           </div>
+
+          {/* 화면에 error 출력 */}
+          {error && <p className="error-message">{error}</p>}
 
           <div className="form-actions">
             <CommonButton variant="primary" type="submit">
