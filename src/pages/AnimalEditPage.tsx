@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { getAnimalById } from "../services/animalService";
 import type { Animal, AnimalStatus } from "../types/animal";
 
@@ -15,6 +15,7 @@ type AnimalFormValues = {
 
 function AnimalEditPage() {
   const { id } = useParams();
+  const animalId = Number(id);
   const [animal, setAnimal] = useState<Animal | null>(null);
   const [formValues, setFormValues] = useState<AnimalFormValues>({
     name: "",
@@ -25,8 +26,6 @@ function AnimalEditPage() {
     status: "ACTIVE",
     joinedDate: "",
   });
-
-  const animalId = Number(id);
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -50,6 +49,20 @@ function AnimalEditPage() {
     };
     fetchAnimal();
   }, [animalId]);
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = event.target;
+
+    // console.log("변경된 필드 이름 : ", name);
+    // console.log("변경된 값 : ", value);
+
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
   return (
     <main className="page-content">
