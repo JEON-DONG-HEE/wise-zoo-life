@@ -86,6 +86,12 @@ function AnimalDetailPage() {
           </CommonButton>
           <CommonButton
             variant="danger"
+            onClick={() => navigate(`/animals/${animalId}/edit`)}
+          >
+            수정
+          </CommonButton>
+          <CommonButton
+            variant="danger"
             onClick={() => setIsDeleteModalOpen(true)}
           >
             삭제
