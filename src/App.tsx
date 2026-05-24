@@ -6,6 +6,7 @@ import "./App.css";
 import AnimalListPage from "./pages/AnimalListPage";
 import AnimalDetailPage from "./pages/AnimalDetailPage";
 import AnimalFormPage from "./pages/AnimalFormPage";
+import AnimalEditPage from "./pages/AnimalEditPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Navigate to="/animals" replace />} />{" "}
         <Route path="/animals" element={<AnimalListPage />} />
         <Route path="/animals/new" element={<AnimalFormPage />} />
+        <Route path="/animals/:id/edit" element={<AnimalEditPage />} />
         <Route path="/animals/:id" element={<AnimalDetailPage />} />
       </Routes>
     </div>
