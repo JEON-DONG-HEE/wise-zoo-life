@@ -85,7 +85,7 @@ function AnimalDetailPage() {
             뒤로가기
           </CommonButton>
           <CommonButton
-            variant="danger"
+            variant="primary"
             onClick={() => navigate(`/animals/${animalId}/edit`)}
           >
             수정

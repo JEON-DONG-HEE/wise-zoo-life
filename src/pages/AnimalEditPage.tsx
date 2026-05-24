@@ -1,4 +1,11 @@
+import { useParams } from "react-router-dom";
+
 function AnimalEditPage() {
+  const { id } = useParams();
+  const animalId = Number(id);
+
+  console.log("현재 페이지 아이디 : ", animalId);
+
   return (
     <main className="page-content">
       <section className="summary-card">
