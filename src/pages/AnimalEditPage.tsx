@@ -71,10 +71,26 @@ function AnimalEditPage() {
     });
   };
 
+  // 수정용 동물 데이터를 만드는 함수
+  const createUpdatedAnimalData = (): Animal => {
+    return {
+      id: animalId,
+      name: formValues.name.trim(),
+      species: formValues.species.trim(),
+      department: formValues.department.trim(),
+      keeper: formValues.keeper.trim(),
+      age: Number(formValues.age),
+      status: formValues.status,
+      joinedDate: formValues.joinedDate,
+    };
+  };
+
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("수정할 폼 데이터 : ", formValues);
+    const updatedAnimal = createUpdatedAnimalData();
+
+    console.log("수정할 폼 데이터 : ", updatedAnimal);
   };
 
   return (
