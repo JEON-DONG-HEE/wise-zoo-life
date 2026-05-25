@@ -81,8 +81,8 @@ export const updateAnimal = async (
 ): Promise<Animal> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error("수정 실패 테스트"));
-      return;
+      // reject(new Error("수정 실패 테스트"));
+      // return;
 
       animals = animals.map((animal) =>
         animal.id === id ? updatedAnimal : animal,

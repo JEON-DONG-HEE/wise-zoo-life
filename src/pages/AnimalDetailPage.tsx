@@ -81,8 +81,11 @@ function AnimalDetailPage() {
         */}
 
         <div className="detail-actions">
-          <CommonButton variant="secondary" onClick={() => navigate(-1)}>
-            뒤로가기
+          <CommonButton
+            variant="secondary"
+            onClick={() => navigate(`/animals/`)}
+          >
+            목록으로 가기
           </CommonButton>
           <CommonButton
             variant="primary"
