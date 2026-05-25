@@ -5,7 +5,7 @@ import {
   type ChangeEvent,
   type SyntheticEvent,
 } from "react";
-import { getAnimalById } from "../services/animalService";
+import { getAnimalById, updateAnimal } from "../services/animalService";
 import type { Animal, AnimalStatus } from "../types/animal";
 import CommonButton from "../components/CommonButton";
 
@@ -120,7 +120,7 @@ function AnimalEditPage() {
   };
 
   // submit 함수
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setError(""); // 이전 에러 초기화
@@ -136,6 +136,11 @@ function AnimalEditPage() {
     const updatedAnimal = createUpdatedAnimalData(); // 저장용 데이터 생성
 
     console.log("수정할 폼 데이터 : ", updatedAnimal); // 확인
+
+    await updateAnimal(animalId, updatedAnimal);
+
+    alert("동물 정보가 수정되었습니다.");
+    navigate(`/animals/${animalId}`); // 수정이 완료되면 완료된 상세페이지로 이동
   };
 
   return (
