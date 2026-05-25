@@ -34,6 +34,7 @@ function AnimalEditPage() {
     joinedDate: "",
   });
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -133,14 +134,19 @@ function AnimalEditPage() {
       return; // 저장 중단
     }
 
-    const updatedAnimal = createUpdatedAnimalData(); // 저장용 데이터 생성
+    try {
+      setSubmitting(true);
 
-    console.log("수정할 폼 데이터 : ", updatedAnimal); // 확인
+      const updatedAnimal = createUpdatedAnimalData(); // 저장용 데이터 생성
 
-    await updateAnimal(animalId, updatedAnimal);
+      console.log("수정할 폼 데이터 : ", updatedAnimal); // 확인
 
-    alert("동물 정보가 수정되었습니다.");
-    navigate(`/animals/${animalId}`); // 수정이 완료되면 완료된 상세페이지로 이동
+      await updateAnimal(animalId, updatedAnimal);
+      alert("동물 정보가 수정되었습니다.");
+      navigate(`/animals/${animalId}`); // 수정이 완료되면 완료된 상세페이지로 이동
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -229,10 +235,14 @@ function AnimalEditPage() {
           {error && <p className="error-message">{error}</p>}
 
           <div className="form-actions">
-            <CommonButton variant="primary" type="submit">
-              저장
+            <CommonButton variant="primary" type="submit" disabled={submitting}>
+              {submitting ? "저장 중..." : "저장"}
             </CommonButton>
-            <CommonButton variant="secondary" onClick={() => navigate(-1)}>
+            <CommonButton
+              variant="secondary"
+              onClick={() => navigate(-1)}
+              disabled={submitting}
+            >
               취소
             </CommonButton>
           </div>
