@@ -142,8 +142,11 @@ function AnimalEditPage() {
       console.log("수정할 폼 데이터 : ", updatedAnimal); // 확인
 
       await updateAnimal(animalId, updatedAnimal);
+
       alert("동물 정보가 수정되었습니다.");
       navigate(`/animals/${animalId}`); // 수정이 완료되면 완료된 상세페이지로 이동
+    } catch {
+      setError("동물 정보 수정 중 문제가 발생했습니다.");
     } finally {
       setSubmitting(false);
     }
