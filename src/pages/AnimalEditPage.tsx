@@ -10,20 +10,15 @@ import type { Animal } from "../types/animal";
 import type { AnimalFormValues } from "../types/animalForm";
 import AnimalForm from "../components/AnimalForm";
 import { validateAnimalForm } from "../utils/animalFormValidation";
+import { initialAnimalFormValues } from "../constants/animalFormInitialValues";
 
 function AnimalEditPage() {
   const { id } = useParams();
   const animalId = Number(id);
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState<AnimalFormValues>({
-    name: "",
-    species: "",
-    department: "",
-    keeper: "",
-    age: "",
-    status: "ACTIVE",
-    joinedDate: "",
-  });
+  const [formValues, setFormValues] = useState<AnimalFormValues>(
+    initialAnimalFormValues,
+  );
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 

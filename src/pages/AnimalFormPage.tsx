@@ -5,17 +5,12 @@ import type { Animal } from "../types/animal";
 import type { AnimalFormValues } from "../types/animalForm";
 import AnimalForm from "../components/AnimalForm";
 import { validateAnimalForm } from "../utils/animalFormValidation";
+import { initialAnimalFormValues } from "../constants/animalFormInitialValues";
 
 function AnimalFormPage() {
-  const [formValues, setFormValues] = useState<AnimalFormValues>({
-    name: "",
-    species: "",
-    department: "",
-    keeper: "",
-    age: "", // age를 숫자가 아니라 일단 문자열 ""로 둔 이유는, input에서 들어오는 값은 기본적으로 문자열이기 때문
-    status: "ACTIVE",
-    joinedDate: "",
-  });
+  const [formValues, setFormValues] = useState<AnimalFormValues>(
+    initialAnimalFormValues,
+  );
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false); // 저장 중 state 추가, submitting : 저장 중인지 여부
   const [error, setError] = useState("");
