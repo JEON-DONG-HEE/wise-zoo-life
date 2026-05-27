@@ -23,7 +23,6 @@ function AnimalEditPage() {
   const { id } = useParams();
   const animalId = Number(id);
   const navigate = useNavigate();
-  const [animal, setAnimal] = useState<Animal | null>(null);
   const [formValues, setFormValues] = useState<AnimalFormValues>({
     name: "",
     species: "",
@@ -41,8 +40,6 @@ function AnimalEditPage() {
       const data = await getAnimalById(animalId);
 
       console.log("수정 대상 : ", data);
-
-      setAnimal(data ?? null); // data가 있으면 data, undefined 면 null 사용
 
       if (!data) return;
 

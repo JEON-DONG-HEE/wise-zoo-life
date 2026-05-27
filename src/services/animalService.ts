@@ -58,7 +58,7 @@ export const addAnimal = async (animal: Animal): Promise<Animal> => {
 };
 
 export const deleteAnimal = async (id: number): Promise<number> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       // 삭제 실패 테스트
       /*
@@ -79,7 +79,7 @@ export const updateAnimal = async (
   id: number,
   updatedAnimal: Animal,
 ): Promise<Animal> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       // reject(new Error("수정 실패 테스트"));
       // return;
