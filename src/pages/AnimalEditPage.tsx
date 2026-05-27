@@ -11,6 +11,7 @@ import type { AnimalFormValues } from "../types/animalForm";
 import AnimalForm from "../components/AnimalForm";
 import { validateAnimalForm } from "../utils/animalFormValidation";
 import { initialAnimalFormValues } from "../constants/animalFormInitialValues";
+import { convertAnimalToFormValues } from "../utils/animalFormMapper";
 
 function AnimalEditPage() {
   const { id } = useParams();
@@ -30,15 +31,7 @@ function AnimalEditPage() {
 
       if (!data) return;
 
-      setFormValues({
-        name: data.name,
-        species: data.species,
-        department: data.department,
-        keeper: data.keeper,
-        age: String(data.age), // 기존 동물의 숫자 나이를 input value 에 넣기 위해 문자열로 바꿈
-        status: data.status,
-        joinedDate: data.joinedDate,
-      });
+      setFormValues(convertAnimalToFormValues(data));
     };
     fetchAnimal();
   }, [animalId]);
