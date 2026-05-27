@@ -6,9 +6,9 @@ import {
   type SyntheticEvent,
 } from "react";
 import { getAnimalById, updateAnimal } from "../services/animalService";
-import CommonButton from "../components/CommonButton";
 import type { Animal } from "../types/animal";
 import type { AnimalFormValues } from "../types/animalForm";
+import AnimalForm from "../components/AnimalForm";
 
 function AnimalEditPage() {
   const { id } = useParams();
@@ -146,98 +146,15 @@ function AnimalEditPage() {
         <h2>동물 정보 수정</h2>
         <p>기존 동물 정보를 수정합니다.</p>
 
-        <form className="animal-form" onSubmit={handleSubmit}>
-          <div className="form-field">
-            <label htmlFor="name">동물이름</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formValues.name}
-              onChange={handleChange}
-              placeholder="예: 레오"
-            />
-          </div>
-          <div className="form-field">
-            <label htmlFor="species">종</label>
-            <input
-              id="species"
-              name="species"
-              type="text"
-              value={formValues.species}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label htmlFor="department">부서</label>
-            <input
-              id="department"
-              name="department"
-              type="text"
-              value={formValues.department}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label htmlFor="keeper">담당 사육사</label>
-            <input
-              id="keeper"
-              name="keeper"
-              type="text"
-              value={formValues.keeper}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label htmlFor="age">나이</label>
-            <input
-              id="age"
-              name="age"
-              type="number"
-              value={formValues.age}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-field">
-            <label htmlFor="status">상태</label>
-            <select
-              id="status"
-              name="status"
-              value={formValues.status}
-              onChange={handleChange}
-            >
-              <option value="ACTIVE">관리중</option>
-              <option value="RESTING">휴식중</option>
-              <option value="TRANSFERRED">이동완료</option>
-            </select>
-          </div>
-          <div className="form-field">
-            <label htmlFor="joinedDate">등록일</label>
-            <input
-              id="joinedDate"
-              name="joinedDate"
-              type="date"
-              value={formValues.joinedDate}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* 화면에 error 출력 */}
-          {error && <p className="error-message">{error}</p>}
-
-          <div className="form-actions">
-            <CommonButton variant="primary" type="submit" disabled={submitting}>
-              {submitting ? "저장 중..." : "저장"}
-            </CommonButton>
-            <CommonButton
-              variant="secondary"
-              onClick={() => navigate(-1)}
-              disabled={submitting}
-            >
-              취소
-            </CommonButton>
-          </div>
-        </form>
+        <AnimalForm
+          formValues={formValues}
+          error={error}
+          submitting={submitting}
+          submitText={submitting ? "저장 중..." : "저장"}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          onCancel={() => navigate("/animals")}
+        />
       </section>
     </main>
   );
