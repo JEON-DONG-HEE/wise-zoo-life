@@ -1,5 +1,6 @@
 import type { AnimalFormValues } from "../types/animalForm";
 
+// 유효성 검사
 export const validateAnimalForm = (formValues: AnimalFormValues) => {
   // trim()은 앞뒤 공백을 제거하는 함수, 공백만 입력한 것도 막을 수 있음
   if (!formValues.name.trim()) return "동물 이름을 입력해주세요.";
