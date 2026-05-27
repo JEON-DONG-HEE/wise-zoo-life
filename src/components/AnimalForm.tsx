@@ -22,17 +22,28 @@ function AnimalForm({
 }: AnimalFormProps) {
   return (
     <form className="animal-form" onSubmit={onSubmit}>
-      <p>AnimalForm 테스트</p>
-      <p>현재 이름 : {formValues.name}</p>
+      <div className="form-field">
+        <label htmlFor="name">동물이름</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          value={formValues.name}
+          onChange={onChange}
+          placeholder="예: 레오"
+        />
+      </div>
+
       {error && <p className="error-message">{error}</p>}
 
-      <button type="submit" disabled={submitting}>
-        {submitText}
-      </button>
-
-      <button type="button" onClick={onCancel}>
-        취소
-      </button>
+      <div className="form-actions">
+        <button type="submit" disabled={submitting}>
+          {submitText}
+        </button>
+        <button type="button" onClick={onCancel} disabled={submitting}>
+          취소
+        </button>
+      </div>
     </form>
   );
 }

@@ -116,7 +116,15 @@ function AnimalFormPage() {
       <section className="summary-card">
         <h2>동물 등록</h2>
 
-        <AnimalForm />
+        <AnimalForm
+          formValues={formValues}
+          error={error}
+          submitting={submitting}
+          submitText={submitting ? "등록 중..." : "등록"}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          onCancel={() => navigate("/animals")}
+        />
 
         <p>새로운 동물 정보를 등록합니다.</p>
 
