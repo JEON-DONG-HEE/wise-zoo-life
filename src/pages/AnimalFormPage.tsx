@@ -1,19 +1,10 @@
 import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import CommonButton from "../components/CommonButton";
-import type { Animal, AnimalStatus } from "../types/animal";
 import { addAnimal } from "../services/animalService";
-
-// 폼에 입력될 값들의 형태를 미리 정해둔 타입
-type AnimalFormValues = {
-  name: string;
-  species: string;
-  department: string;
-  keeper: string;
-  age: string;
-  status: AnimalStatus;
-  joinedDate: string;
-};
+import type { Animal } from "../types/animal";
+import type { AnimalFormValues } from "../types/animalForm";
+import AnimalForm from "../components/AnimalForm";
 
 function AnimalFormPage() {
   const [formValues, setFormValues] = useState<AnimalFormValues>({
@@ -124,6 +115,9 @@ function AnimalFormPage() {
     <main className="page-content">
       <section className="summary-card">
         <h2>동물 등록</h2>
+
+        <AnimalForm />
+
         <p>새로운 동물 정보를 등록합니다.</p>
 
         {error && <p className="error-message">{error}</p>}

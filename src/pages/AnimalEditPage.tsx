@@ -6,18 +6,9 @@ import {
   type SyntheticEvent,
 } from "react";
 import { getAnimalById, updateAnimal } from "../services/animalService";
-import type { Animal, AnimalStatus } from "../types/animal";
 import CommonButton from "../components/CommonButton";
-
-type AnimalFormValues = {
-  name: string;
-  species: string;
-  department: string;
-  keeper: string;
-  age: string;
-  status: AnimalStatus;
-  joinedDate: string;
-};
+import type { Animal } from "../types/animal";
+import type { AnimalFormValues } from "../types/animalForm";
 
 function AnimalEditPage() {
   const { id } = useParams();
