@@ -9,6 +9,7 @@ import { getAnimalById, updateAnimal } from "../services/animalService";
 import type { Animal } from "../types/animal";
 import type { AnimalFormValues } from "../types/animalForm";
 import AnimalForm from "../components/AnimalForm";
+import { validateAnimalForm } from "../utils/animalFormValidation";
 
 function AnimalEditPage() {
   const { id } = useParams();
@@ -61,39 +62,6 @@ function AnimalEditPage() {
     });
   };
 
-  // 유효성 검사 함수
-  const validateForm = () => {
-    // 이름 앞뒤 공백을 제거했는데 빈 값이면 에러 메시지를 반환한다.
-    if (!formValues.name.trim()) {
-      return "동물 이름을 입력해주세요.";
-    }
-    if (!formValues.species.trim()) {
-      return "종을 입력해주세요.";
-    }
-    if (!formValues.department.trim()) {
-      return "부서를 입력해주세요.";
-    }
-    if (!formValues.keeper.trim()) {
-      return "담당 사육사를 입력해주세요.";
-    }
-
-    // 빈 값 검사 먼저
-    if (!formValues.age.trim()) {
-      return "나이를 입력해주세요.";
-    }
-    // 빈 값 검사 후 숫자로 변환, 오류 검사 로직 추가
-    const ageNumber = Number(formValues.age);
-    if (Number.isNaN(ageNumber) || ageNumber <= 0) {
-      return "나이는 1 이상의 숫자로 입력해주세요.";
-    }
-
-    if (!formValues.joinedDate) {
-      return "등록일을 선택해주세요.";
-    }
-
-    return "";
-  };
-
   // 수정용 데이터 생성 함수
   const createUpdatedAnimalData = (): Animal => {
     return {
@@ -114,7 +82,7 @@ function AnimalEditPage() {
 
     setError(""); // 이전 에러 초기화
 
-    const validationMessage = validateForm(); // 입력값 검사
+    const validationMessage = validateAnimalForm(formValues); // 입력값 검사
 
     // 에러 메시지가 있으면 저장을 막는다
     if (validationMessage) {
